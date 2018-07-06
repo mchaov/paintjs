@@ -1,8 +1,6 @@
 "use strict"
 
-const path = require("path");
 const webpack = require("webpack");
-const TypedocWebpackPlugin = require("typedoc-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -35,23 +33,6 @@ module.exports = Object.assign(
                     ...envConfig
                 }
             }),
-            // new TypedocWebpackPlugin({
-            //     jsx: "react",
-            //     target: "es5",
-            //     module: "commonjs",
-            //     name: packageJson.name,
-            //     excludeExternals: true,
-            //     includeDeclarations: true,
-            //     ignoreCompilerErrors: true,
-            //     emitDecoratorMetadata: true,
-            //     experimentalDecorators: true,
-            //     externalPattern: "**/*+.d.ts",
-            //     exclude: "**/*+(test|index).*",
-            //     allowSyntheticDefaultImports: true,
-            //     suppressImplicitAnyIndexErrors: true,
-            //     forceConsistentCasingInFileNames: true,
-            //     out: path.resolve(__dirname, "..", "docs"),
-            // }, "./blocks"),
             new CompressionPlugin({
                 asset: "[path][query]",
                 filename: (asset) => {
