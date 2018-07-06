@@ -56,7 +56,6 @@
         "no-bitwise": true,
         "no-debugger": true,
         "no-misused-new": true,
-        "no-null-keyword": true,
         "no-duplicate-super": true,
         "no-internal-module": true,
         "no-floating-promises": true,
