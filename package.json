@@ -1,7 +1,7 @@
 {
   "name": "paintjs",
   "version": "0.0.1",
-  "description": "One of my favourite university courses. Make MSPaint like program. This time using just JS :)",
+  "description": "One of my favourite university course projects. Make MSPaint like program. This time using just JS :) (...and react, and typescripts :) :) :) )",
   "scripts": {
     "build": "webpack --config ./.configs/webpack.release.js",
     "build-external": "webpack --config ./.configs/webpack.release.external.js",
