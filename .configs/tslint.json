@@ -71,16 +71,6 @@
         "no-duplicate-variable": [
             true,
             "check-parameters"
-        ],
-        "no-console": {
-            "options": [
-                "debug",
-                "info",
-                "log",
-                "time",
-                "timeEnd",
-                "trace"
-            ]
-        }
+        ]
     }
 }

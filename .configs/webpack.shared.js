@@ -1,14 +1,15 @@
 const fs = require("fs-extra");
 const path = require("path");
 fs.removeSync(path.resolve("./dist"));
-const blocks = require("./blocks");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const packageJson = require("../package.json");
 
 module.exports = {
     target: "web",
-    entry: Object.assign({}, ...blocks),
+    entry: {
+        index: path.resolve(__dirname, "..", "src", "index.tsx")
+    },
     output: {
         path: path.resolve(__dirname, "..", "dist"),
         filename: "[name].js",
@@ -20,27 +21,9 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 commons: {
-                    name: packageJson.name,
-                    chunks: "initial",
-                    minChunks: packageJson.webpack && packageJson.webpack.minChunks || 3
                 }
             }
         }
-    },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM",
-        "mobx": "mobx",
-        "mobx-utils": "mobxUtils",
-        "mobx-react": "mobxReact",
-        "velocity-animate": "Velocity",
-        "signalr-no-jquery": "signalR",
-        "sbtech-general-api-client": "SBTech",
-        "sbtech-sports-api": "SBTech",
-        "react-container-query": "ReactContainerQuery",
-        "sb-msg-bus": "sbMsgBus",
-        "sb-resp-lib": "sbRespLib",
-        "sb-resp-ui": "sbRespUI"
     },
     resolve: {
         extensions: [".js", ".ts", ".tsx", ".jsx", "json"],
@@ -68,13 +51,12 @@ module.exports = {
         },
         {
             test: /\.(less)$/,
-
             use: [
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
                     options: {
-                        root: '/static',
+                        root: '/assets',
                         url: false
                     }
                 },
