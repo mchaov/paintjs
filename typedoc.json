@@ -1,0 +1,13 @@
+{
+    "name": "API DOCS",
+    "module": "commonjs",
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "includeDeclarations": true,
+    "excludeExternals": true,
+    "exclude": "**/*+(test|index|d).*"
+}

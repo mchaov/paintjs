@@ -1,0 +1,84 @@
+#!/usr/bin/env groovy
+pipeline {
+	agent {
+		label "nodejs8"
+	}
+	options {
+		timeout(time: 20, unit: 'MINUTES')
+		disableConcurrentBuilds()
+	}
+	environment {
+		Registry = "http://artifactory.sbtech.com:8081/artifactory/General/"
+	}
+	stages {
+		stage('Prepare env') {
+			steps {
+				script {
+                   def PKG_NAME = bat(script: "@node -p \"require('./package.json').name\"", returnStdout: true).trim()
+                   def PKG_VER = bat(script: "@node -p \"require('./package.json').version\"", returnStdout: true).trim()
+				   echo '[INFO]Updating package version to :' + PKG_VER[0..PKG_VER.lastIndexOf('.')] + env.BUILD_ID
+				   bat returnStatus: true, script: "npm version ${PKG_VER[0..PKG_VER.lastIndexOf('.')]}${env.BUILD_ID}"
+                }
+				bat 'npm install webpack'
+				bat 'npm i npmrc'
+				configFileProvider([configFile(fileId: '52acf712-75e9-4e49-9097-6f5dc3613437', targetLocation: '.npmrc')]) {
+				 echo '[INFO] File .npmrc created in workspace'
+				}
+				bat 'npm install'
+			}
+		}
+		stage('Test') {
+			steps {
+				bat 'npm run test:coverage'
+			}
+		}
+		stage('Build') {
+			steps {
+			  script {
+			    def PKG_NAME = bat(script: "@node -p \"require('./package.json').name\"", returnStdout: true).trim()
+				if(PKG_NAME.contains("sb-resp-lib"))
+				{
+				  echo '[INFO] SB-RESP-LIB build progress...'
+				  bat 'npm run build:all'
+				} else {
+				  bat 'npm run build'
+				}
+			  }
+			}
+		}
+		stage('Upload to GoogleCloudStorage') {
+			when {
+                branch 'master'
+            }
+			steps {
+				script {
+                   def PKG_NAME = bat(script: "@node -p \"require('./package.json').name\"", returnStdout: true).trim()
+				   def PKG_VER = bat(script: "@node -p \"require('./package.json').version\"", returnStdout: true).trim()
+				   if(PKG_NAME.contains("sb-resp-lib")) {
+				     echo '[INFO] SB-RESP-LIB publishing'
+				     bat 'npm publish'
+				     dir ('./_bundles/') {
+					   googleStorageUpload bucket: "gs://sbtech-cdn-rj/rj/lib/${PKG_VER}/", credentialsId: 'sbtech-cdn', pattern: '*.gz.js', sharedPublicly: true, showInline: true, metadata: 'gzip'
+				     }
+				   } else {
+				   	 dir ('./dist/') {
+					   googleStorageUpload bucket: "gs://sbtech-cdn-rj/rj/${PKG_NAME}/${PKG_VER}/", credentialsId: 'sbtech-cdn', pattern: '*.gz.js', sharedPublicly: true, showInline: true, metadata: 'gzip'
+				     }
+				   }
+				   withCredentials([usernamePassword(credentialsId: '65532f8a-77d0-4191-9e45-d10a2c37c772', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+				     bat("git tag -a ${PKG_VER} -m 'Jenkins' ${GIT_COMMIT}")
+				     String encoded_password = java.net.URLEncoder.encode(env.GIT_PASSWORD, "UTF-8").replace('%', '%%')
+				     String url_split = env.GIT_URL.split("//")[1]
+				     bat ("@git push https://${GIT_USERNAME}:${encoded_password}@${url_split} --tags")
+				   }
+				}
+			}
+		}
+	}
+	post {
+		always {
+			deleteDir()
+			cleanWs()
+		}
+	}
+}
