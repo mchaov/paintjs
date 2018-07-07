@@ -14,7 +14,7 @@ export class GenericShape<P, S> extends React.Component<P & GenericShapeProps, S
 
     render() {
         return (
-            <svg width="100" height="100">
+            <svg width={this.props.width} height={this.props.height}>
                 {this.children}
             </svg>
         )
