@@ -8,10 +8,6 @@ export type GenericShapeProps = {
 export class GenericShape<P, S> extends React.Component<P & GenericShapeProps, S> {
     children!: any
 
-    test() {
-        console.log("mashala")
-    }
-
     render() {
         return (
             <svg width={this.props.width} height={this.props.height}>
