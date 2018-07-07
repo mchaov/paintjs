@@ -3,12 +3,12 @@ import * as React from "react";
 import { GenericShape } from "../genericShape";
 
 export type CircleProps = {
+    r: string
     cx: string
     cy: string
-    r: string
+    fill?: string
     stroke?: string
     strokeWidth?: string
-    fill?: string
 }
 
 enum CirclePropsMap {
