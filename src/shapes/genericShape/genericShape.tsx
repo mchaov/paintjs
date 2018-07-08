@@ -9,6 +9,10 @@ export type GenericShapeProps = {
     width: string
 }
 
+export type GenericStyles = {
+
+}
+
 export type GenericShapeSharedProps = {
     fill?: string
     style?: string

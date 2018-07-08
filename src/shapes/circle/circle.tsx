@@ -10,7 +10,13 @@ export type CircleProps = {
 
 export class Circle extends GenericShape<CircleProps, {}> {
     constructor(props) {
-        super(props);
+        super(
+            {
+                ...props,
+                height: (parseInt(props.r) * 2).toString(),
+                width: (parseInt(props.r) * 2).toString()
+            }
+        );
 
         this.children = <circle {
             ...Object.keys(this.props)
