@@ -2,17 +2,13 @@ import * as React from "react";
 
 import { GenericShape, GenericPropsMap, GenericShapeSharedProps } from "../genericShape";
 
-export type CircleProps = {
-    r: string
-    cx: string
-    cy: string
-} & GenericShapeSharedProps;
+export type RectangleProps = {} & GenericShapeSharedProps;
 
-export class Circle extends GenericShape<CircleProps, {}> {
+export class Rectangle extends GenericShape<RectangleProps, {}> {
     constructor(props) {
         super(props);
 
-        this.children = <circle {
+        this.children = <rect {
             ...Object.keys(this.props)
                 .reduce((x, y) => {
                     x[GenericPropsMap[y] || y] = this.props[y];

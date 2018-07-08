@@ -28,8 +28,11 @@ export class Area extends React.Component<
                     cx="50"
                     cy="50"
                     fill="red"
-                    stroke="black"
-                    strokeWidth="3"
+                />
+                <S.Rectangle
+                    width="100"
+                    height="100"
+                    fill="red"
                 />
             </div>
         )
