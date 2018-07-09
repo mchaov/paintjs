@@ -1,29 +1,21 @@
 import * as React from "react";
 
-import { GenericShape, GenericPropsMap, GenericShapeSharedProps } from "../genericShape";
+import { GenericShape, GenericShapeSharedProps } from "../genericShape";
 
 export type CircleProps = {
-    r: string
-    cx: string
-    cy: string
+    r: number
 } & GenericShapeSharedProps;
 
-export class Circle extends GenericShape<CircleProps, {}> {
-    constructor(props) {
-        super(
-            {
-                ...props,
-                height: (parseInt(props.r) * 2).toString(),
-                width: (parseInt(props.r) * 2).toString()
-            }
+export class Circle extends GenericShape<CircleProps> {
+    render() {
+        return (
+            <circle
+                ref={n => this.ref = n}
+                r={this.props.r}
+                cx={this.props.r + this.state.x}
+                cy={this.props.r + this.state.y}
+                fill={this.props.fill}
+            />
         );
-
-        this.children = <circle {
-            ...Object.keys(this.props)
-                .reduce((x, y) => {
-                    x[GenericPropsMap[y] || y] = this.props[y];
-                    return x;
-                }, {})
-        } />
     }
 }

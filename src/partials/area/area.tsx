@@ -21,19 +21,21 @@ export class Area extends React.Component<
             <div
                 ref={n => this.root = n}
                 className="area">
-                <S.Circle
-                    width="100"
-                    height="100"
-                    r="50"
-                    cx="50"
-                    cy="50"
-                    fill="red"
-                />
-                <S.Rectangle
-                    width="100"
-                    height="100"
-                    fill="red"
-                />
+                <svg width={"100%"} height={"100%"}>
+                    <S.Circle
+                        r={50}
+                        x={150}
+                        y={0}
+                        fill="orange"
+                    />
+                    <S.Rectangle
+                        x={0}
+                        y={150}
+                        width={100}
+                        height={100}
+                        fill="red"
+                    />
+                </svg>
             </div>
         )
     }

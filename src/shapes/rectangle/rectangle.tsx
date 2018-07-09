@@ -1,19 +1,23 @@
 import * as React from "react";
 
-import { GenericShape, GenericPropsMap, GenericShapeSharedProps } from "../genericShape";
+import { GenericShape, GenericShapeSharedProps } from "../genericShape";
 
-export type RectangleProps = {} & GenericShapeSharedProps;
+export type RectangleProps = {
+    width: number
+    height: number
+} & GenericShapeSharedProps;
 
-export class Rectangle extends GenericShape<RectangleProps, {}> {
-    constructor(props) {
-        super(props);
-
-        this.children = <rect {
-            ...Object.keys(this.props)
-                .reduce((x, y) => {
-                    x[GenericPropsMap[y] || y] = this.props[y];
-                    return x;
-                }, {})
-        } />
+export class Rectangle extends GenericShape<RectangleProps> {
+    render() {
+        return (
+            <rect
+                ref={n => this.ref = n}
+                width={this.props.width}
+                height={this.props.height}
+                x={this.state.x}
+                y={this.state.y}
+                fill={this.props.fill}
+            />
+        )
     }
 }
