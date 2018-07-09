@@ -15,6 +15,7 @@ export class Circle extends GenericShape<CircleProps> {
                 cx={this.props.r + this.state.x}
                 cy={this.props.r + this.state.y}
                 fill={this.props.fill}
+                style={this.state.style}
             />
         );
     }

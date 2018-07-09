@@ -19,7 +19,7 @@ export type GenericShapeSharedProps = {
 
 export class GenericShape<P> extends React.Component<
     P & GenericShapeProps,
-    GenericShapeState & { isMoving?: boolean }
+    GenericShapeState & { isMoving?: boolean, style: React.CSSProperties }
     >
 {
     ref!: Element | null
@@ -41,7 +41,8 @@ export class GenericShape<P> extends React.Component<
         this.state = {
             isMoving: false,
             x: x1,
-            y: y1
+            y: y1,
+            style: {}
         }
 
         this.moveTmp = { x: 0, y: 0 }
@@ -68,7 +69,7 @@ export class GenericShape<P> extends React.Component<
             x: e.clientX,
             y: e.clientY
         };
-        this.setState({ isMoving: true })
+        this.setState({ isMoving: true, style: { zIndex: 5 } })
     }
 
     handlerMoveEnd(e) {
@@ -76,7 +77,7 @@ export class GenericShape<P> extends React.Component<
             x: 0,
             y: 0
         };
-        this.setState({ isMoving: false })
+        this.setState({ isMoving: false, style: { zIndex: 0 } })
     }
 
     componentDidMount() {

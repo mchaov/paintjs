@@ -17,6 +17,7 @@ export class Rectangle extends GenericShape<RectangleProps> {
                 x={this.state.x}
                 y={this.state.y}
                 fill={this.props.fill}
+                style={this.state.style}
             />
         )
     }
