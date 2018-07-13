@@ -8,12 +8,11 @@ export type CircleProps = {
 
 export class Circle extends GenericShape<CircleProps> {
     render() {
-        return (
+        return this.drawWrapper(
             <circle
-                ref={n => this.ref = n}
                 r={this.props.r}
-                cx={this.props.r + this.state.x}
-                cy={this.props.r + this.state.y}
+                cx={this.props.r}
+                cy={this.props.r}
                 fill={this.props.fill}
                 style={this.state.style}
             />

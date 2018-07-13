@@ -3,19 +3,16 @@ import * as React from "react";
 import { GenericShape, GenericShapeSharedProps } from "../genericShape";
 
 export type RectangleProps = {
-    width: number
-    height: number
+    width: string
+    height: string
 } & GenericShapeSharedProps;
 
 export class Rectangle extends GenericShape<RectangleProps> {
     render() {
-        return (
+        return this.drawWrapper(
             <rect
-                ref={n => this.ref = n}
                 width={this.props.width}
                 height={this.props.height}
-                x={this.state.x}
-                y={this.state.y}
                 fill={this.props.fill}
                 style={this.state.style}
             />

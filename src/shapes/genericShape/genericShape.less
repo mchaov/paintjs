@@ -1,0 +1,85 @@
+.svg-wrapper {
+    top: 0;
+    left: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    svg {
+        position: relative;
+        pointer-events: none;
+    }
+    &:hover {
+        .svg-wrapper-controls {
+            opacity: .5;
+        }
+    }
+    &.isFocused {
+        .svg-wrapper-controls {
+            opacity: 1;
+        }
+    }
+}
+
+.svg-wrapper-controls {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    border: 1px dotted red;
+    transition-delay: 100ms;
+    transition-duration: 160ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+}
+
+.svg-controls {
+    width: auto;
+    left: -5px;
+    right: -5px;
+    height: 10px;
+    position: absolute;
+    pointer-events: none;
+}
+
+.controls-handle {
+    top: 0;
+    width: 10px;
+    height: 10px;
+    display: block;
+    background: red;
+    position: absolute;
+    pointer-events: all;
+    border: 1px solid cyan;
+}
+
+.l-handle {
+    left: 0;
+}
+
+.m-handle {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.r-handle {
+    right: 0;
+}
+
+.t-controls {
+    top: -5px;
+}
+
+.m-controls {
+    top: 50%;
+    transform: translateY(-50%);
+    .m-handle {
+        display: none;
+    }
+}
+
+.b-controls {
+    bottom: -5px;
+}

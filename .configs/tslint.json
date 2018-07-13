@@ -27,7 +27,7 @@
         "object-literal-shorthand": true,
         "cyclomatic-complexity": [
             true,
-            6
+            10
         ],
         "triple-equals": [
             true,
