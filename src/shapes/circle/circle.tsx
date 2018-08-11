@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { GenericShape, GenericShapeSharedProps } from "../genericShape";
+import { GenericShape } from "../genericShape";
 
 export type CircleProps = {
     r: number
-} & GenericShapeSharedProps;
+};
 
 export class Circle extends GenericShape<CircleProps> {
     render() {

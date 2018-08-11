@@ -1,6 +1,7 @@
 .svg-wrapper {
     top: 0;
     left: 0;
+    z-index: 1;
     font-size: 0;
     line-height: 0;
     position: absolute;
@@ -14,6 +15,7 @@
         }
     }
     &.isFocused {
+        z-index: 10;
         .svg-wrapper-controls {
             opacity: 1;
         }
@@ -53,6 +55,10 @@
     position: absolute;
     pointer-events: all;
     border: 1px solid cyan;
+    &:hover {
+        background: cyan;
+        border: 1px solid red;
+    }
 }
 
 .l-handle {

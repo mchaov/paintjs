@@ -1,19 +1,24 @@
 import * as React from "react";
 
-import { GenericShape, GenericShapeSharedProps } from "../genericShape";
+import { GenericShape } from "../genericShape";
 
 export type RectangleProps = {
     width: string
     height: string
-} & GenericShapeSharedProps;
+};
 
 export class Rectangle extends GenericShape<RectangleProps> {
+
+    handleControlsHooks(x: string) {
+        console.log(x, this)
+    }
+
     render() {
         return this.drawWrapper(
             <rect
-                width={this.props.width}
-                height={this.props.height}
-                fill={this.props.fill}
+                width={this.state.width}
+                height={this.state.height}
+                fill={this.state.fill}
                 style={this.state.style}
             />
         )

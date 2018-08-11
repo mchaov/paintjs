@@ -21,6 +21,9 @@ export class Area extends React.Component<
             <div
                 className="area">
                 <S.Circle
+                    stroke=""
+                    strokeWidth=""
+                    style={{}}
                     r={50}
                     x={150}
                     y={0}
@@ -29,6 +32,9 @@ export class Area extends React.Component<
                     fill="orange"
                 />
                 <S.Rectangle
+                    stroke=""
+                    strokeWidth=""
+                    style={{}}
                     x={0}
                     y={150}
                     width={"100px"}
