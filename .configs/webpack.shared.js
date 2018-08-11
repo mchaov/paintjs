@@ -5,6 +5,17 @@ fs.removeSync(path.resolve("./dist"));
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const packageJson = require("../package.json");
 
+const threadLoader = require('thread-loader');
+
+const threadOptions = {
+    workers: require('os').cpus().length - 1,
+    workerNodeArgs: ['--max-old-space-size=4096']
+};
+
+threadLoader.warmup(threadOptions, [
+    'ts-loader',
+]);
+
 module.exports = {
     target: "web",
     entry: {
@@ -72,14 +83,12 @@ module.exports = {
             },
             {
                 loader: 'thread-loader',
-                options: {
-                    workers: require('os').cpus().length - 1,
-                    workerNodeArgs: ['--max-old-space-size=4096'],
-                },
+                options: threadOptions
             },
             {
                 loader: 'ts-loader',
                 options: {
+                    transpileOnly: true,
                     happyPackMode: true
                 }
             }
