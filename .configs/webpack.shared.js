@@ -74,6 +74,7 @@ module.exports = {
                 loader: 'thread-loader',
                 options: {
                     workers: require('os').cpus().length - 1,
+                    workerNodeArgs: ['--max-old-space-size=4096'],
                 },
             },
             {

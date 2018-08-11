@@ -1,6 +1,5 @@
 "use strict"
 
-const path = require("path");
 const webpack = require("webpack");
 const sharedConfig = require("./webpack.shared");
 const sharedPlugins = require("./sharedPlugins");
